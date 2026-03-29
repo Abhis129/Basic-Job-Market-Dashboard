@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Market Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── Top bar ─────────────────────────────────────────────────────────── -->
+  <div class="top-bar">
+    <div>
+      <h1> Job Market Dashboard</h1>
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-top:2px;">Live simulated scrape · Updated just now</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <div class="badge"><span></span>Live Feed</div>
+      <button class="refresh-btn" onclick="refreshAll()">
+        <svg id="refresh-icon" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M1.5 8A6.5 6.5 0 0 1 13 4.5M14.5 8A6.5 6.5 0 0 1 3 11.5"/>
+          <polyline points="12 2 14 4.5 11.5 6.5"/>
+          <polyline points="4 9.5 1.5 11.5 3.5 14"/>
+        </svg>
+        Refresh
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Search & filters ────────────────────────────────────────────────── -->
+  <div class="search-row">
+    <input type="text" id="search-input" placeholder="Search job title, company, skill..." oninput="filterJobs()" />
+    <select id="role-filter" onchange="filterJobs()">
+      <option value="">All Roles</option>
+      <option value="Engineer">Engineer</option>
+      <option value="Data">Data</option>
+      <option value="Product">Product</option>
+      <option value="Design">Design</option>
+      <option value="DevOps">DevOps</option>
+    </select>
+    <select id="source-filter" onchange="filterJobs()">
+      <option value="">All Sources</option>
+      <option value="LinkedIn">LinkedIn</option>
+      <option value="Indeed">Indeed</option>
+      <option value="Glassdoor">Glassdoor</option>
+    </select>
+    <select id="sort-filter" onchange="filterJobs()">
+      <option value="recent">Most Recent</option>
+      <option value="salary_high">Salary ↑</option>
+      <option value="salary_low">Salary ↓</option>
+    </select>
+  </div>
+
+  <!-- Skill tag filters (populated by app.js) -->
+  <div class="filters" id="tag-filters">
+    <span style="font-size:12px;color:var(--color-text-secondary);line-height:1.9;">Skills:</span>
+  </div>
+
+  <!-- ── Metric cards ─────────────────────────────────────────────────────── -->
+  <div class="metrics">
+    <div class="metric">
+      <div class="label">Total Jobs Scraped</div>
+      <div class="value" id="m-total">247</div>
+      <div class="delta up" id="m-total-d">↑ 18 new today</div>
+    </div>
+    <div class="metric">
+      <div class="label">Avg. Salary</div>
+      <div class="value" id="m-avg">$112k</div>
+      <div class="delta up">↑ 4.2% this month</div>
+    </div>
+    <div class="metric">
+      <div class="label">Top Source</div>
+      <div class="value" style="font-size:16px;margin-top:4px;" id="m-source">LinkedIn</div>
+      <div class="delta" style="color:var(--color-text-secondary);">58% of listings</div>
+    </div>
+    <div class="metric">
+      <div class="label">Remote Jobs</div>
+      <div class="value" id="m-remote">61%</div>
+      <div class="delta up">↑ 3% vs last week</div>
+    </div>
+  </div>
+
+  <!-- ── Charts row 1 ─────────────────────────────────────────────────────── -->
+  <div class="charts-row">
+    <div class="chart-card">
+      <h3>Salary range by role</h3>
+      <div class="chart-wrap" style="height:200px;"><canvas id="salaryChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Jobs by source</h3>
+      <div class="chart-wrap" style="height:200px;"><canvas id="sourceChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ── Charts row 2 ─────────────────────────────────────────────────────── -->
+  <div class="charts-row" style="grid-template-columns: 2fr 1fr;">
+    <div class="chart-card">
+      <h3>New listings over time (last 14 days)</h3>
+      <div class="chart-wrap" style="height:160px;"><canvas id="timeChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Top hiring companies</h3>
+      <div id="company-bars" style="font-size:12px;"></div>
+    </div>
+  </div>
+
+  <!-- ── Job listings table ───────────────────────────────────────────────── -->
+  <div class="table-card">
+    <div class="t-header">
+      <h3>Live Listings <span id="listing-count" style="color:var(--color-text-tertiary);font-weight:400;"></span></h3>
+      <div style="font-size:11px;color:var(--color-text-tertiary);">Click a row to view details</div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:30%">Title</th>
+          <th style="width:18%">Company</th>
+          <th style="width:13%">Salary</th>
+          <th style="width:10%">Type</th>
+          <th style="width:10%">Source</th>
+          <th style="width:11%">Posted</th>
+          <th style="width:8%">Match</th>
+        </tr>
+      </thead>
+      <tbody id="jobs-table"></tbody>
+    </table>
+    <div class="pagination">
+      <span id="page-info">Page 1 of 3</span>
+      <button class="pg-btn" onclick="prevPage()">← Prev</button>
+      <button class="pg-btn" onclick="nextPage()">Next →</button>
+    </div>
+  </div>
+
+  <div class="footer-note">Data is simulated for demo purposes. Real scrapers should use official APIs or comply with each platform's ToS.</div>
+
+  <!-- ── Scripts ──────────────────────────────────────────────────────────── -->
+  <!-- 1. Chart.js (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <!-- 2. App logic (data, filtering, table, pagination) -->
+  <script src="app.js"></script>
+  <!-- 3. Chart initializations (depends on Chart.js + DOM canvas elements) -->
+  <script src="charts.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans, 'Segoe UI', sans-serif); background: transparent; color: var(--color-text-primary); padding: 1rem 0; }
+
+.top-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 1.5rem; }
+.top-bar h1 { font-size: 18px; font-weight: 500; }
+.top-bar .badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; background: var(--color-background-success); color: var(--color-text-success); font-weight: 500; display: flex; align-items: center; gap: 5px; }
+.top-bar .badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--color-text-success); animation: pulse 1.5s infinite; display: inline-block; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.filter-btn { font-size: 12px; padding: 5px 14px; border-radius: 20px; border: 0.5px solid var(--color-border-secondary); background: transparent; color: var(--color-text-secondary); cursor: pointer; transition: all .15s; }
+.filter-btn.active, .filter-btn:hover { background: var(--color-background-secondary); color: var(--color-text-primary); }
+.filter-btn.active { border-color: var(--color-border-primary); }
+
+.search-row { display: flex; gap: 8px; margin-bottom: 1.5rem; }
+.search-row input { flex: 1; font-size: 13px; padding: 8px 14px; border-radius: var(--border-radius-md, 8px); border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); color: var(--color-text-primary); }
+.search-row select { font-size: 13px; padding: 8px 12px; border-radius: var(--border-radius-md, 8px); border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); color: var(--color-text-primary); }
+
+.metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+.metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md, 8px); padding: 14px 16px; }
+.metric .label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 6px; }
+.metric .value { font-size: 22px; font-weight: 500; }
+.metric .delta { font-size: 11px; margin-top: 4px; }
+.delta.up { color: var(--color-text-success); }
+.delta.down { color: var(--color-text-danger); }
+
+.charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
+.chart-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg, 12px); padding: 16px; }
+.chart-card h3 { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 14px; }
+.chart-card .chart-wrap { position: relative; width: 100%; }
+
+.table-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg, 12px); overflow: hidden; margin-bottom: 1.5rem; }
+.table-card .t-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.table-card .t-header h3 { font-size: 13px; font-weight: 500; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
+th { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-align: left; padding: 10px 16px; border-bottom: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); }
+td { padding: 11px 16px; border-bottom: 0.5px solid var(--color-border-tertiary); vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--color-background-secondary); }
+
+.company-tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; background: var(--color-background-info); color: var(--color-text-info); white-space: nowrap; display: inline-block; }
+.salary-pill { font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 500; white-space: nowrap; }
+.salary-high { background: var(--color-background-success); color: var(--color-text-success); }
+.salary-mid { background: var(--color-background-warning); color: var(--color-text-warning); }
+.salary-low { background: var(--color-background-danger); color: var(--color-text-danger); }
+
+.source-tag { font-size: 10px; padding: 2px 7px; border-radius: 3px; border: 0.5px solid var(--color-border-tertiary); color: var(--color-text-tertiary); }
+
+.skills-row { display: flex; gap: 12px; margin-bottom: 1rem; flex-wrap: wrap; }
+.skill-chip { font-size: 11px; padding: 4px 12px; border-radius: 20px; border: 0.5px solid var(--color-border-tertiary); color: var(--color-text-secondary); }
+
+.refresh-btn { font-size: 12px; padding: 6px 14px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: transparent; cursor: pointer; color: var(--color-text-secondary); display: flex; align-items: center; gap: 6px; }
+.refresh-btn:hover { background: var(--color-background-secondary); }
+.spinning { animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.pagination { display: flex; align-items: center; justify-content: flex-end; gap: 8px; padding: 10px 16px; border-top: 0.5px solid var(--color-border-tertiary); font-size: 12px; color: var(--color-text-secondary); }
+.pg-btn { padding: 3px 10px; border-radius: 4px; border: 0.5px solid var(--color-border-tertiary); background: transparent; cursor: pointer; color: var(--color-text-secondary); font-size: 12px; }
+.pg-btn:hover { background: var(--color-background-secondary); }
+
+.trend-bar { height: 4px; border-radius: 2px; margin-top: 6px; }
+.footer-note { font-size: 11px; color: var(--color-text-tertiary); text-align: right; padding: 4px 0; }
+
+@media (max-width: 600px) {
+  .metrics { grid-template-columns: 1fr 1fr; }
+  .charts-row { grid-template-columns: 1fr; }
+}
