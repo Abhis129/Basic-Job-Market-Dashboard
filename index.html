@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <!-- ── Top bar ─────────────────────────────────────────────────────────── -->
+  <!-- Top bar  -->
   <div class="top-bar">
     <div>
       <h1> Job Market Dashboard</h1>
@@ -27,7 +27,7 @@
     </div>
   </div>
 
-  <!-- ── Search & filters ────────────────────────────────────────────────── -->
+  <!-- Search & filters -->
   <div class="search-row">
     <input type="text" id="search-input" placeholder="Search job title, company, skill..." oninput="filterJobs()" />
     <select id="role-filter" onchange="filterJobs()">
@@ -56,7 +56,7 @@
     <span style="font-size:12px;color:var(--color-text-secondary);line-height:1.9;">Skills:</span>
   </div>
 
-  <!-- ── Metric cards ─────────────────────────────────────────────────────── -->
+  <!-- Metric cards -->
   <div class="metrics">
     <div class="metric">
       <div class="label">Total Jobs Scraped</div>
@@ -80,7 +80,7 @@
     </div>
   </div>
 
-  <!-- ── Charts row 1 ─────────────────────────────────────────────────────── -->
+  <!-- Charts row 1 -->
   <div class="charts-row">
     <div class="chart-card">
       <h3>Salary range by role</h3>
@@ -92,7 +92,7 @@
     </div>
   </div>
 
-  <!-- ── Charts row 2 ─────────────────────────────────────────────────────── -->
+  <!-- Charts row 2 -->
   <div class="charts-row" style="grid-template-columns: 2fr 1fr;">
     <div class="chart-card">
       <h3>New listings over time (last 14 days)</h3>
@@ -104,7 +104,7 @@
     </div>
   </div>
 
-  <!-- ── Job listings table ───────────────────────────────────────────────── -->
+  <!-- Job listings table -->
   <div class="table-card">
     <div class="t-header">
       <h3>Live Listings <span id="listing-count" style="color:var(--color-text-tertiary);font-weight:400;"></span></h3>
@@ -133,11 +133,14 @@
 
   <div class="footer-note">Data is simulated for demo purposes. Real scrapers should use official APIs or comply with each platform's ToS.</div>
 
-  <!-- ── Scripts ──────────────────────────────────────────────────────────── -->
+  <!-- Scripts -->
+   
   <!-- 1. Chart.js (CDN) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
   <!-- 2. App logic (data, filtering, table, pagination) -->
   <script src="app.js"></script>
+
   <!-- 3. Chart initializations (depends on Chart.js + DOM canvas elements) -->
   <script src="charts.js"></script>
 
