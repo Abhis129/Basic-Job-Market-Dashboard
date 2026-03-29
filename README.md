@@ -1,5 +1,8 @@
 # Job Market Dashboard
 
+
+🔗 **Live Demo:** [https://abhis129.github.io/Basic-Job-Market-Dashboard/] (https://abhis129.github.io/Basic-Job-Market-Dashboard/)
+
 A clean, interactive job market analytics dashboard built with vanilla HTML, CSS, and JavaScript. Visualizes job listings, salary ranges, hiring trends, and top companies — all in a single-page app with no frameworks or build tools required.
 
 ![Job Market Dashboard](https://img.shields.io/badge/Status-Live-brightgreen) ![HTML](https://img.shields.io/badge/HTML-5-orange) ![CSS](https://img.shields.io/badge/CSS-3-blue) ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow) ![Chart.js](https://img.shields.io/badge/Chart.js-4.4.1-pink)

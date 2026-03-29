@@ -1,4 +1,4 @@
-// ─── Data ────────────────────────────────────────────────────────────────────
+// Data 
 
 const JOBS = [
   {title:"Senior Frontend Engineer",company:"Stripe",salary:165,type:"Remote",source:"LinkedIn",posted:"2h ago",skills:["React","TypeScript","CSS"],role:"Engineer",match:96},
@@ -27,13 +27,13 @@ const JOBS = [
   {title:"Cloud Architect",company:"Twilio",salary:188,type:"Remote",source:"LinkedIn",posted:"6d ago",skills:["AWS","GCP","Architecture"],role:"DevOps",match:83},
 ];
 
-// ─── State ───────────────────────────────────────────────────────────────────
+// State 
 
 let filteredJobs = [...JOBS];
 let currentPage = 1;
 const perPage = 8;
 
-// ─── Skill tag filters ────────────────────────────────────────────────────────
+// Skill tag filters 
 
 const skillTags = ["Python","React","TypeScript","Go","Kubernetes","SQL","AWS","Figma","PyTorch"];
 const tagFilters = document.getElementById('tag-filters');
@@ -46,7 +46,7 @@ skillTags.forEach(s => {
   tagFilters.appendChild(b);
 });
 
-// ─── Filter & sort ────────────────────────────────────────────────────────────
+// Filter & sort
 
 function filterJobs() {
   const q = document.getElementById('search-input').value.toLowerCase();
@@ -70,13 +70,13 @@ function filterJobs() {
   renderTable();
 }
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
+// Helpers
 
 function salaryClass(s) {
   return s >= 160 ? 'salary-high' : s >= 130 ? 'salary-mid' : 'salary-low';
 }
 
-// ─── Table render ─────────────────────────────────────────────────────────────
+// Table render 
 
 function renderTable() {
   const tbody = document.getElementById('jobs-table');
@@ -106,7 +106,7 @@ function renderTable() {
     </tr>`).join('');
 }
 
-// ─── Pagination ───────────────────────────────────────────────────────────────
+// Pagination
 
 function prevPage() {
   if (currentPage > 1) { currentPage--; renderTable(); }
@@ -117,7 +117,7 @@ function nextPage() {
   if (currentPage < pages) { currentPage++; renderTable(); }
 }
 
-// ─── Refresh ──────────────────────────────────────────────────────────────────
+// Refresh
 
 function refreshAll() {
   const icon = document.getElementById('refresh-icon');
@@ -129,7 +129,7 @@ function refreshAll() {
   }, 800);
 }
 
-// ─── Company bars ─────────────────────────────────────────────────────────────
+// Company bars 
 
 function renderCompanyBars() {
   const counts = {};
@@ -148,7 +148,7 @@ function renderCompanyBars() {
     </div>`).join('');
 }
 
-// ─── Init ─────────────────────────────────────────────────────────────────────
+// Init
 
 renderTable();
 renderCompanyBars();

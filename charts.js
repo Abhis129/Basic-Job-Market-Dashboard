@@ -6,7 +6,7 @@ window.addEventListener('load', () => {
   const textColor = isDark ? '#c2c0b6' : '#3d3d3a';
   const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
 
-  // ─── Salary by role (bar chart) ─────────────────────────────────────────────
+  // Salary by role (bar chart)
   new Chart(document.getElementById('salaryChart'), {
     type: 'bar',
     data: {
@@ -15,7 +15,7 @@ window.addEventListener('load', () => {
         { label: 'Min', data: [128, 108, 125, 115, 138], backgroundColor: '#B5D4F4', borderRadius: 4 },
         { label: 'Avg', data: [165, 168, 136, 127, 158], backgroundColor: '#378ADD', borderRadius: 4 },
         { label: 'Max', data: [205, 210, 145, 135, 188], backgroundColor: '#185FA5', borderRadius: 4 },
-      ],
+      ],  
     },
     options: {
       responsive: true,
@@ -35,7 +35,7 @@ window.addEventListener('load', () => {
     },
   });
 
-  // ─── Jobs by source (doughnut chart) ────────────────────────────────────────
+  // Jobs by source (doughnut chart)
   new Chart(document.getElementById('sourceChart'), {
     type: 'doughnut',
     data: {
@@ -55,7 +55,7 @@ window.addEventListener('load', () => {
     },
   });
 
-  // ─── New listings over time (line chart) ────────────────────────────────────
+  // New listings over time (line chart)
   const days = Array.from({ length: 14 }, (_, i) => {
     const d = new Date();
     d.setDate(d.getDate() - 13 + i);
